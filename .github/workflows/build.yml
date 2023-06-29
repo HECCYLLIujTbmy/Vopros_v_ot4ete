@@ -1,0 +1,33 @@
+name: Build and Package
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and run Docker container
+      run: |
+        docker build -t mycontainer .
+        docker run -v $(pwd)/output:/output mycontainer
+        
+    - name: Change permissions
+      run: |
+        sudo chmod -R 777 output/
+        
+    - name: Create artifact
+      run: |
+        cd output
+        tar -cvzf result.tar.gz result.txt
+        mv result.txt result.deb
+      if: always()
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: result-artifact
+        path: output/result.tar.gz
