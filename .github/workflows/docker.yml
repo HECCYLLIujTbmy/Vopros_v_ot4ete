@@ -1,0 +1,16 @@
+name: Example Workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and run Docker container
+      run: |
+        docker build -t mycontainer .
+        docker run -v $(pwd)/output:/output mycontainer
