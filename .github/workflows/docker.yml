@@ -12,6 +12,6 @@ jobs:
 
     - name: Build and run Docker container
       run: |
-        docker run -d -p 127.0.1:80:80 nginx
+      
         docker build -t mycontainer .
         docker run -v $(pwd)/output:/output mycontainer
