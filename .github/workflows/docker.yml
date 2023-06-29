@@ -12,6 +12,6 @@ jobs:
 
     - name: Build and run Docker container
       run: |
-      
+        python3 -m http.server
         docker build -t mycontainer .
         docker run -v $(pwd)/output:/output mycontainer
