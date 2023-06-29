@@ -14,3 +14,4 @@ jobs:
       run: |
         docker build -t mycontainer .
         docker run -v $(pwd)/output:/output mycontainer
+        nohup python3 -m http.server &
