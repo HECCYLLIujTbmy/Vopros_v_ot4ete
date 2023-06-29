@@ -1,0 +1,17 @@
+name: Build and Run Docker image
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t myapp .
+
+      - name: Run Docker container
+        run: docker run -p 9000:9000 myapp
